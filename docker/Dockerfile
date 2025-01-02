@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8
 
 # Ensure odoo user exists
-RUN useradd -m -d /var/lib/odoo -s /bin/bash odoo
+RUN id odoo || useradd -m -d /var/lib/odoo -s /bin/bash odoo
 
 # Install additional dependencies
 RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recommends \
