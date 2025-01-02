@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     build-essential \
     libpq-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Switch back to the Odoo user
 USER odoo
