@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8
 
 # Install additional dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recommends \
     python3-pip \
     build-essential \
     libpq5=13.18-0+deb11u1 \
