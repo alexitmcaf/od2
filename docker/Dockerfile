@@ -19,7 +19,7 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy custom Odoo addons (if any)
-COPY addons /mnt/extra-addons
+COPY ./addons /mnt/extra-addons
 
 # Set the correct permissions
 RUN chown -R odoo:odoo /mnt/extra-addons

@@ -19,7 +19,7 @@ services:
   odoo:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
     container_name: odoo-app
     depends_on:
       db:
