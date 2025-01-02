@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recomme
     libpq-dev=13.18-0+deb11u1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Ensure the odoo user exists
+RUN id -u odoo &>/dev/null || useradd -m -d /home/odoo -s /bin/bash odoo
+
 # Copy requirements and install Python dependencies
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
