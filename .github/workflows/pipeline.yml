@@ -62,7 +62,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
-        docker build -t odoo:16 .
+        docker build -t odoo:16 -f docker/Dockerfile .
 
     - name: Start Odoo Service
       run: |
