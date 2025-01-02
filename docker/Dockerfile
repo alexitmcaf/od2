@@ -9,7 +9,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8
 
 # Install additional dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN rm -f /etc/apt/sources.list.d/pgdg.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     build-essential \
     libpq-dev \
