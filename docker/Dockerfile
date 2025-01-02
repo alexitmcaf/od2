@@ -20,9 +20,7 @@ RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy custom Odoo addons (if any)
 COPY ./addons /mnt/extra-addons
-
-# Set the correct permissions
-RUN chown -R odoo:odoo /mnt/extra-addons
+RUN mkdir -p /mnt/extra-addons && chown -R odoo:odoo /mnt/extra-addons
 
 # Expose necessary port
 EXPOSE 8069
