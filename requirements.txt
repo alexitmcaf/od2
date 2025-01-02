@@ -1,0 +1,8 @@
+# Python dependencies for Odoo 16
+office365-rest-python-client
+psycopg2-binary
+pytz
+babel
+lxml
+python-dateutil
+requests
