@@ -1,6 +1,6 @@
 FROM odoo:16
 
-# Switch to root user
+# Switch to root user for setup tasks
 USER root
 
 # Set environment variables
@@ -16,12 +16,12 @@ RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recomme
     libpq-dev=13.18-0+deb11u1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Switch back to the Odoo user
-USER odoo
-
 # Copy requirements and install Python dependencies
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+
+# Switch to odoo user after setup
+USER odoo
 
 # Copy custom Odoo addons (if any)
 COPY ./addons /mnt/extra-addons
