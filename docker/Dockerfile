@@ -7,9 +7,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8
 
-# Ensure odoo user exists
-RUN id odoo || useradd -m -d /var/lib/odoo -s /bin/bash odoo
-
 # Install additional dependencies
 RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recommends \
     python3-pip \
@@ -22,9 +19,9 @@ RUN apt-get update && apt-get install -y --allow-downgrades --no-install-recomme
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
-# Copy custom Odoo addons (if any)
-COPY ./addons /mnt/extra-addons
-RUN mkdir -p /mnt/extra-addons && chown -R odoo:odoo /mnt/extra-addons
+# Ensure directories and ownership
+RUN mkdir -p /etc/odoo /mnt/extra-addons && \
+    chown -R odoo:odoo /etc/odoo /mnt/extra-addons
 
 # Switch to odoo user
 USER odoo

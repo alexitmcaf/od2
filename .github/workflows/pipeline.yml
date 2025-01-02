@@ -30,7 +30,7 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-      
+
     - name: Debug repository files
       run: ls -la
 
@@ -40,6 +40,18 @@ jobs:
           echo "addons directory not found, creating an empty directory."
           mkdir -p ./addons
         fi
+
+    - name: Create default odoo.conf file
+      run: |
+        cat <<EOF > ./docker/odoo.conf
+        [options]
+        addons_path = /mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+        db_host = localhost
+        db_port = 5432
+        db_user = odoo
+        db_password = odoo
+        logfile = /var/log/odoo/odoo.log
+        EOF
 
     - name: Copy addons to docker folder
       run: |
@@ -68,6 +80,7 @@ jobs:
       run: |
         docker run -d --name odoo-test --network host \
           -e DB_HOST=localhost -e DB_PORT=5432 -e DB_USER=odoo -e DB_PASSWORD=odoo \
+          -v $(pwd)/docker/odoo.conf:/etc/odoo/odoo.conf \
           odoo:16
 
     - name: Verify Odoo is Running
