@@ -1,5 +1,7 @@
-# Base Odoo 16 Dockerfile
 FROM odoo:16
+
+# Switch to root user
+USER root
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -13,6 +15,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Switch back to the Odoo user
+USER odoo
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt /tmp/requirements.txt
