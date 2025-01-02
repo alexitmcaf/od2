@@ -9,11 +9,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8
 
 # Install additional dependencies
-RUN rm -f /etc/apt/sources.list.d/pgdg.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     build-essential \
-    libpq-dev \
+    libpq5=13.18-0+deb11u1 \
+    libpq-dev=13.18-0+deb11u1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Switch back to the Odoo user
